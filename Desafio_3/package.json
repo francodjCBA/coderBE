@@ -2,7 +2,7 @@
   "name": "desafio_3",
   "version": "1.0.0",
   "description": "Crear server en express",
-  "main": "/src/app.js",
+  "main": "src/app.js",
   "type": "module",
   "scripts": {
     "start": "nodemon app.js"
