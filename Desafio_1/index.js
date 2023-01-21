@@ -57,7 +57,6 @@ class ProductManager {
   }
 }
 
-
 const ProductManager1 = new ProductManager()
 ProductManager1.addProduct('cafe', 'cafe en polvo', 800, 'sin imagen', 1234, 20)
 ProductManager1.addProduct('yerba', 'yerba mate', 305, ' ', 1235, 11)
