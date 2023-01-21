@@ -58,3 +58,14 @@ class ProductManager {
 }
 
 
+const ProductManager1 = new ProductManager()
+ProductManager1.addProduct('cafe', 'cafe en polvo', 800, 'sin imagen', 1234, 20)
+ProductManager1.addProduct('yerba', 'yerba mate', 305, ' ', 1235, 11)
+ProductManager1.addProduct('yerba', 'yerba mate', 305, ' ', 1235, 11)
+ProductManager1.addProduct('azucar', 'azucar refinada', 1236, 11)
+ProductManager1.addProduct('cafe', 'cafe en sobre', 540, 'imagen', 234, 250)
+ProductManager1.addProduct('agua', 'agua en botella', 105, ' ', 138, 19)
+ProductManager1.addProduct('edulcorante', 'edulcorante', 50, ' ', 125, 11)
+ProductManager1.addProduct('azucar', 'azucar refinada de otra marca', 135, 100)
+
+console.log(ProductManager1.getProducts())
