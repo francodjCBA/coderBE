@@ -1,11 +1,11 @@
 {
   "name": "desafio_3",
   "version": "1.0.0",
-  "description": "Crear server en express",
+  "description": "Servidor con express",
   "main": "src/app.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon .src/app.js"
   },
   "author": "Franco Jimenez",
   "license": "ISC",
