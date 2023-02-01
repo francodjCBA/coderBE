@@ -1,6 +1,6 @@
-const fs = require('fs')
+import fs from 'fs'
 
-class ProductManager {
+export default class ProductManager {
   constructor(path) {
     this.path = path
     this.products = []
@@ -87,45 +87,3 @@ class ProductManager {
   }
 
 }
-
-///////////////////////// TEST ///////////////////
-const path = './products.json';
-const productManager = new ProductManager(path);
-
-async function test_get_products(){
-  const consultarProductos = await productManager.getProducts()
-  console.log(consultarProductos)
-}
-
-async function test_add_product(product){
-  productManager.addProduct(product)
-}
-
-async function test_get_product_by_id(idprod){
-  const consultarProductosxId = await productManager.getProductById(idprod)
-  console.log(consultarProductosxId)
-}
-
-async function test_update_product(idprod, keyValue){
-  productManager.updateProduct(idprod, keyValue)
-}
-
-async function test_delete_product(idprod){
-  productManager.deleteProduct(idprod)
-}
-
-const productA = {
-  title: "producto prueba",
-  description: "Este es un producto prueba",
-  price: 200,
-  thumbnail: "Sin imagen",
-  code: "abc123",
-  stock: 25
-}
-
-//test_get_products()
-test_add_product(productA)
-//test_get_product_by_id(2)
-//test_delete_product(3);
-//test_update_product(2,  { price: 150 })
-

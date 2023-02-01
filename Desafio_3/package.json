@@ -2,7 +2,7 @@
   "name": "desafio_3",
   "version": "1.0.0",
   "description": "Servidor con express",
-  "main": "src/app.js",
+  "main": "app.js",
   "type": "module",
   "scripts": {
     "start": "nodemon .src/app.js"

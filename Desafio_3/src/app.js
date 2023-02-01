@@ -1,85 +1,35 @@
-const productos = [
-    {
-        id:1,
-        nombre:'iPhone',
-        precio: 500,
-        stock:25
-    },
-    {
-        id:2,
-        nombre:'iPad',
-        precio: 200,
-        stock:40
-    },
-    {
-        id:3,
-        nombre:'TV',
-        precio: 1000,
-        stock:15
-    },
-    {
-        id:4,
-        nombre:'Computador',
-        precio: 1500,
-        stock:20
-    },
-]
-
-const usuarios = [
-    {
-        id:1,
-        nombre: 'Juan',
-        apellido: 'Hoyos',
-        edad: 38,
-        correo: 'jhoyos@mail.com',
-      },
-      {
-        id:2,
-        nombre: 'Luis',
-        apellido: 'Gutierrez',
-        edad: 26,
-        correo: 'lgutierrez@mail.com',
-      }
-]
-
 import express from 'express'
+import ProductManager from './PorductManager.js'
 
 const app = express()
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
 
-app.get('/',(req,res)=>{
-    res.send('<h1 style="color:blue">Ruta raiz</h1>')
-    //res.json(productos)
-    //res.redirect
-    //res.render
-})
-// buscar todos los productos
-app.get('/productos',(req,res)=>{
+const productManager = new ProductManager('../products.json')
+
+app.get('/products', async (req, res) => {
     const {limit} = req.query
-    console.log(req.query)
-    //console.log(req)
-    //res.send('Ruta productos')
-    const productosLimit = productos.slice(0,limit)
-    res.json({productos:productosLimit})
+
+    let products = await productManager.getProducts()
+
+    if (limit) {
+        products = products.slice(0, parseInt(limit));
+      }
+
+      res.json({ products })
 })
 
-// buscar un producto en particular
-app.get('/productos/:idProducto',(req,res)=>{
-    const {idProducto} = req.params
-    const producto = productos.find(p=>p.id===parseInt(idProducto))
-    if(producto){
-        res.json({mesage:'Producto encontrado',producto})
-    } else {
-        res.json({mesage:'Producto no encontrado'})
-    }
+app.get('/products/:pid', async (req, res) => {
+    const {pid} = req.params
+    const products = await productManager.getProductById(parseInt(pid))
+    if (!products) {
+        return res.status(404).json({
+          error: "Product not found",
+        })
+      }
+    res.json({ products })
 })
 
-
-app.get('/clientes',(req,res)=>{
-    //res.send('Ruta clientes')
-    res.json(clientes)
-})
-
-
-app.listen(8080,()=>{
-    console.log('Escuchando al puerto 8080')
-})
+app.listen(8080, () => {
+  console.log('Servidor escuchando al puerto 8080');
+});
