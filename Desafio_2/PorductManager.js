@@ -9,17 +9,20 @@ class ProductManager {
   async addProduct(product){
     try {
       const productsFile = await this.getProducts()
+      const code = productsFile.find(c => c.code === product.code)
       if(productsFile == []){
         product.id = 1
       }
       else{
         product.id = productsFile.length+1
       }      
-
-      productsFile.push(product)
-
-      await fs.promises.writeFile(this.path,JSON.stringify(productsFile))
-
+      if (code){
+        console.log('ya existe código')
+      }
+      else{
+        productsFile.push(product)
+        await fs.promises.writeFile(this.path,JSON.stringify(productsFile))
+      }
     } catch (error){
         console.log(error)
     }
@@ -120,8 +123,8 @@ const productA = {
   stock: 25
 }
 
-test_get_products()
-//test_add_product(productA)
+//test_get_products()
+test_add_product(productA)
 //test_get_product_by_id(2)
 //test_delete_product(3);
 //test_update_product(2,  { price: 150 })
